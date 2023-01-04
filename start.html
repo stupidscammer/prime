@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+           
+        </script>
+    </head>
+    <body>
+        <div id="result"></div>
+        <label for="lname">Input Number:</label>
+        <input type="text" id="fname" name="fname">
+        <label id="warning" ></label>
+        <button type="button" onclick="handleStart()">Start</button>
+        <button type="button" onclick="handleStop()">Stop</button>
+        <script>
+            let inputElem = document.querySelector('input');
+            let warning = document.querySelector('warning');    
+            let t_id=0;  
+            let x=0;
+            function timing(){
+                x=parseInt(localStorage.getItem("inputvalue"));
+                if(x>=99){
+                    console.log("clearInterval=======>>>>>")
+                    clearInterval(t_id);
+                    // localStorage.removeItem("inputvalue");
+                }
+                else {
+                    if(prime(x)){
+                        console.log("clearInterval====because x===>>>>>")
+                        alert("Current value is prime.")
+                        clearInterval(t_id);
+                        // localStorage.removeItem("inputvalue");
+                    }
+                    else{
+                        x++;
+                        localStorage.setItem("inputvalue", x);
+                        document.getElementById("fname").value=x;                        
+                    }                    
+                }
+            }      
+            function handleStart() {     
+                t_id=setInterval(timing,1000);   
+            }
+            function handleStop() {
+                alert("Process is stoped by you!")
+                clearInterval(t_id);
+                // localStorage.removeItem("inputvalue");
+            }
+            function prime(x){//if prime true;
+                let isPrime = true;
+                let a = Math.round(Math.sqrt(x));
+                // console.log("x =",x, "and a=",a)
+                for (let i = 2; i <= a; i++) {
+                    if (x % i == 0) {
+                        console.log("x is devided by",i)
+                        isPrime = false;
+                        break;
+                    }
+                }
+                return isPrime;
+            }
+            inputElem.addEventListener('input', () => {
+                console.log(parseInt(inputElem.value)); // Log the new value after an input is made
+                if(parseInt(inputElem.value)<=100){// less than 100
+                    // warning.value="";
+                    if (typeof(Storage) !== "undefined") {
+                        // Store
+                        localStorage.setItem("inputvalue", inputElem.value);
+                        // console.log("inputting to Storage :",inputElem.value)
+                        // Retrieve
+                        // document.getElementById("result").innerHTML = localStorage.getItem("inputvalue");
+                    } 
+                    else {
+                        // document.getElementById("result").innerHTML("Sorry, your browser does not support Web Storage...");
+                    }
+                }
+                else{//more than 100
+                    inputElem.value="";console.log("hhhhhhhhhhhhh");
+                    // warning.value="Please type number less than 100.";
+                }
+            });
+            // Check browser support
+            
+        </script>
+
+    </body>
+</html>
