@@ -77,6 +77,3 @@
     </body>
 </html>
 
-// skype    live:.cid.9a654b79ec08a141
-// gmail    lucaly17@gmail.com
-// discord   lucaly#9244
